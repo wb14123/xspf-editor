@@ -63,6 +63,9 @@ def clean(playlist: os.Path): Unit = {
 def add(playlist: os.Path, dir: os.Path): Unit = {
   val oldVideos = getVideosFromDoc(playlist)
   val newVideos = getVideosFromDir(dir)
-  createPlaylist(oldVideos ++ newVideos, playlist)
-  println(s"Added ${newVideos.size} videos.")
+  val finalVideos = oldVideos ++ newVideos
+  val diff = finalVideos.size - oldVideos.size
+  createPlaylist(finalVideos, playlist)
+  println(s"Scanned ${newVideos.size} videos.")
+  println(s"Added $diff videos.")
 }
